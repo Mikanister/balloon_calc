@@ -299,38 +299,40 @@ class BalloonCalculatorGUI:
             
     def format_results(self, results: Dict[str, Any], mode: str):
         """Форматування результатів для відображення"""
+        # Встановлюємо ширину для підпису та значення
+        label_width = 32
+        value_width = 10
+        def fmt(label, value, unit=""):
+            return f"{label:<{label_width}} {value:>{value_width}} {unit}".rstrip()
+
         result_lines = []
-        
         if mode == "volume":
-            result_lines.append(f"Потрібний обʼєм газу:     {results['gas_volume']:.2f} м³")
-            
+            result_lines.append(fmt("Потрібний обʼєм газу:", f"{results['gas_volume']:.2f}", "м³"))
         result_lines.extend([
-            f"Необхідний обʼєм кулі:     {results['required_volume']:.2f} м³",
-            f"Корисне навантаження (старт):      {results['payload']:.2f} кг",
-            f"Маса оболонки:             {results['mass_shell']:.2f} кг",
-            f"Підйомна сила (старт):     {results['lift']:.2f} кг",
-            f"Радіус кулі:               {results['radius']:.2f} м",
-            f"Площа поверхні:            {results['surface_area']:.2f} м²",
-            f"Щільність повітря:         {results['rho_air']:.4f} кг/м³",
-            f"Підйомна сила на м³:       {results['net_lift_per_m3']:.4f} кг/м³"
+            fmt("Необхідний обʼєм кулі:", f"{results['required_volume']:.2f}", "м³"),
+            fmt("Корисне навантаження (старт):", f"{results['payload']:.2f}", "кг"),
+            fmt("Маса оболонки:", f"{results['mass_shell']:.2f}", "кг"),
+            fmt("Підйомна сила (старт):", f"{results['lift']:.2f}", "кг"),
+            fmt("Радіус кулі:", f"{results['radius']:.2f}", "м"),
+            fmt("Площа поверхні:", f"{results['surface_area']:.2f}", "м²"),
+            fmt("Щільність повітря:", f"{results['rho_air']:.4f}", "кг/м³"),
+            fmt("Підйомна сила на м³:", f"{results['net_lift_per_m3']:.4f}", "кг/м³")
         ])
-        
         # Завжди відображаю втрати газу для гелію/водню
         if self.gas_var.get() in ("Гелій", "Водень"):
-            result_lines.append(f"Втрати газу за політ:     {results['gas_loss']:.6f} м³")
+            result_lines.append(fmt("Втрати газу за політ:", f"{results['gas_loss']:.6f}", "м³"))
             if results['gas_loss'] < 0.01:
                 result_lines.append("Втрати газу дуже малі для цих параметрів (менше 0.01 м³)")
-            result_lines.append(f"Обʼєм газу в кінці:       {results['final_gas_volume']:.2f} м³")
-            result_lines.append(f"Підйомна сила (кінець):   {results['lift_end']:.2f} кг")
-            result_lines.append(f"Корисне навантаження (кінець): {results['payload_end']:.2f} кг")
+            result_lines.append(fmt("Обʼєм газу в кінці:", f"{results['final_gas_volume']:.2f}", "м³"))
+            result_lines.append(fmt("Підйомна сила (кінець):", f"{results['lift_end']:.2f}", "кг"))
+            result_lines.append(fmt("Корисне навантаження (кінець):", f"{results['payload_end']:.2f}", "кг"))
             if results['payload_end'] < 0:
                 result_lines.append(f"⚠️  Куля втратить підйомну силу до кінця польоту!")
-        
         if self.gas_var.get() == "Гаряче повітря":
             result_lines.extend([
-                f"T зовні:                   {results['T_outside_C']:.1f} °C",
-                f"Макс. напруга:             {results['stress'] / 1e6:.2f} МПа",
-                f"Допустима напруга:         {results['stress_limit'] / 1e6:.1f} МПа"
+                fmt("T зовні:", f"{results['T_outside_C']:.1f}", "°C"),
+                fmt("Макс. напруга:", f"{results['stress'] / 1e6:.2f}", "МПа"),
+                fmt("Допустима напруга:", f"{results['stress_limit'] / 1e6:.1f}", "МПа")
             ])
             # Перевірка безпеки
             if results['stress'] > 0:
@@ -341,7 +343,6 @@ class BalloonCalculatorGUI:
                     result_lines.append(f"✅ Коефіцієнт безпеки: {safety_factor:.1f}")
             else:
                 result_lines.append(f"✅ Коефіцієнт безпеки: ∞ (дуже високий, напруга ≈ 0)")
-        
         self.result_var.set('\n'.join(result_lines))
         
     def save_settings(self):
