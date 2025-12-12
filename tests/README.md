@@ -18,7 +18,7 @@ pytest
 
 ### З покриттям коду
 ```bash
-pytest --cov=baloon --cov-report=html
+pytest --cov=balloon --cov-report=html
 ```
 
 ### Конкретний файл тестів
@@ -45,12 +45,12 @@ pip install pytest-cov
 
 Потім запустіть:
 ```bash
-pytest --cov=baloon --cov-report=term-missing
+pytest --cov=balloon --cov-report=term-missing
 ```
 
 Для HTML-звіту:
 ```bash
-pytest --cov=baloon --cov-report=html
+pytest --cov=balloon --cov-report=html
 ```
 
 Звіт буде в папці `htmlcov/index.html`

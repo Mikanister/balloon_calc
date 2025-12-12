@@ -1,7 +1,7 @@
 site_name: Калькулятор аеростатів
 site_description: Документація для калькулятора аеростатів
 site_author: Братство дисидентів БРТ
-site_url: https://yourusername.github.io/baloon-calculator
+site_url: https://yourusername.github.io/balloon-calculator
 
 theme:
   name: material
@@ -64,7 +64,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: [baloon]
+          paths: [balloon]
           options:
             docstring_style: google
             show_source: true

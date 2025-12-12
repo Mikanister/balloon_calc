@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "baloon-calculator"
+name = "balloon-calculator"
 version = "2.0.0"
 description = "Калькулятор аеростатів з графічним інтерфейсом для розрахунку параметрів повітряних куль"
 readme = "README.md"
@@ -56,19 +56,19 @@ docs = [
 ]
 
 [project.scripts]
-baloon-calculator = "baloon.main_improved:main"
+balloon-calculator = "balloon.main_improved:main"
 
 [project.urls]
-Homepage = "https://github.com/yourusername/baloon-calculator"
-Documentation = "https://yourusername.github.io/baloon-calculator"
-Repository = "https://github.com/yourusername/baloon-calculator"
-Issues = "https://github.com/yourusername/baloon-calculator/issues"
+Homepage = "https://github.com/yourusername/balloon-calculator"
+Documentation = "https://yourusername.github.io/balloon-calculator"
+Repository = "https://github.com/yourusername/balloon-calculator"
+Issues = "https://github.com/yourusername/balloon-calculator/issues"
 
 [tool.setuptools]
-packages = ["baloon", "baloon.analysis", "baloon.gui", "baloon.patterns", "baloon.shapes"]
+packages = ["balloon", "balloon.analysis", "balloon.gui", "balloon.patterns", "balloon.shapes", "balloon.model"]
 
 [tool.setuptools.package-data]
-baloon = ["*.json", "*.md"]
+balloon = ["*.json", "*.md"]
 
 [tool.black]
 line-length = 100

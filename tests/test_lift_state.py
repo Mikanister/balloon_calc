@@ -1,13 +1,13 @@
 import pytest
 
-from baloon.analysis import _compute_lift_state
+from balloon.analysis import _compute_lift_state
 
 
 def test_compute_lift_state_positive_lift_helium():
     state = _compute_lift_state(
         gas_type="Гелій",
         material="TPU",
-        thickness_mm=35,
+        thickness_um=35,
         gas_volume=10.0,
         height=0,
         ground_temp=15.0,
@@ -23,7 +23,7 @@ def test_compute_lift_state_no_lift_when_negative_volume():
     state = _compute_lift_state(
         gas_type="Гелій",
         material="TPU",
-        thickness_mm=35,
+        thickness_um=35,
         gas_volume=0.0,
         height=0,
         ground_temp=15.0,
@@ -41,7 +41,7 @@ def test_compute_lift_state_with_pear_shape():
     state = _compute_lift_state(
         gas_type="Гелій",
         material="TPU",
-        thickness_mm=35,
+        thickness_um=35,
         gas_volume=10.0,
         height=1000,
         ground_temp=15.0,
@@ -60,7 +60,7 @@ def test_compute_lift_state_with_cigar_shape():
     state = _compute_lift_state(
         gas_type="Гелій",
         material="TPU",
-        thickness_mm=35,
+        thickness_um=35,
         gas_volume=10.0,
         height=1000,
         ground_temp=15.0,
@@ -79,7 +79,7 @@ def test_compute_lift_state_with_pillow_shape():
     state = _compute_lift_state(
         gas_type="Гелій",
         material="TPU",
-        thickness_mm=35,
+        thickness_um=35,
         gas_volume=10.0,
         height=1000,
         ground_temp=15.0,
@@ -97,7 +97,7 @@ def test_compute_lift_state_without_shape_params():
     state = _compute_lift_state(
         gas_type="Гелій",
         material="TPU",
-        thickness_mm=35,
+        thickness_um=35,
         gas_volume=10.0,
         height=1000,
         ground_temp=15.0,

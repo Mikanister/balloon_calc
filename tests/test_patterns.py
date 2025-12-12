@@ -4,7 +4,7 @@
 
 import pytest
 import math
-from baloon.patterns import (
+from balloon.patterns import (
     calculate_sphere_gore_pattern,
     calculate_pillow_pattern,
     calculate_pear_pattern,

@@ -3,7 +3,7 @@
 """
 
 import pytest
-from baloon.validators import (
+from balloon.validators import (
     ValidationError,
     validate_float,
     validate_material,
@@ -12,7 +12,7 @@ from baloon.validators import (
     validate_height_parameters,
     validate_all_inputs
 )
-from baloon.constants import MATERIALS, GAS_DENSITY
+from balloon.constants import MATERIALS, GAS_DENSITY
 
 
 class TestValidateFloat:
@@ -326,7 +326,7 @@ class TestValidateAllInputs:
     
     def test_validate_shape_params_optional(self):
         """Перевірка валідації опціональних параметрів форми"""
-        from baloon.validators import validate_shape_params
+        from balloon.validators import validate_shape_params
         
         # Сфера - немає параметрів
         result = validate_shape_params("sphere", {})
@@ -370,7 +370,7 @@ class TestValidateAllInputs:
     
     def test_validate_shape_params_invalid_shape(self):
         """Перевірка обробки невалідної форми"""
-        from baloon.validators import validate_shape_params
+        from balloon.validators import validate_shape_params
         
         with pytest.raises(ValidationError, match="Непідтримувана форма"):
             validate_shape_params("invalid_shape", {})

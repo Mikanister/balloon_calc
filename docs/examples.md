@@ -3,13 +3,13 @@
 ## Базовий розрахунок
 
 ```python
-from baloon.calculations import calculate_balloon_parameters
+from balloon.calculations import calculate_balloon_parameters
 
 results = calculate_balloon_parameters(
     gas_type="Гелій",
     gas_volume=10.0,
     material="TPU",
-    thickness_mm=35,
+    thickness_um=35,
     start_height=0,
     work_height=1000,
     mode="volume"
@@ -26,7 +26,7 @@ results = calculate_balloon_parameters(
     gas_type="Гелій",
     gas_volume=10.0,
     material="TPU",
-    thickness_mm=35,
+    thickness_um=35,
     start_height=0,
     work_height=1000,
     shape_type="pear",
@@ -41,7 +41,7 @@ results = calculate_balloon_parameters(
 ## Використання Rich для виводу
 
 ```python
-from baloon.utils import print_results_table
+from balloon.utils import print_results_table
 
 print_results_table(results, "Результати розрахунку")
 ```
@@ -49,12 +49,12 @@ print_results_table(results, "Результати розрахунку")
 ## Оптимізація висоти з SciPy
 
 ```python
-from baloon.analysis.optimal_height import calculate_optimal_height
+from balloon.analysis.optimal_height import calculate_optimal_height
 
 optimal = calculate_optimal_height(
     gas_type="Гелій",
     material="TPU",
-    thickness_mm=35,
+    thickness_um=35,
     gas_volume=10.0
 )
 

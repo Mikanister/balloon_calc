@@ -3,7 +3,7 @@
 ## Структура проекту
 
 ```
-baloon/
+balloon/
 ├── __init__.py
 ├── main_improved.py      # Точка входу
 ├── calculations.py       # Основні розрахунки
@@ -35,7 +35,7 @@ baloon/
 
 ```bash
 pytest
-pytest --cov=baloon --cov-report=html
+pytest --cov=balloon --cov-report=html
 ```
 
 ## Збірка документації
@@ -53,9 +53,9 @@ pyinstaller main_improved.spec
 
 ## Додавання нових форм
 
-1. Створіть модуль в `baloon/shapes/`
+1. Створіть модуль в `balloon/shapes/`
 2. Додайте функції: `*_volume`, `*_surface_area`, `*_dimensions_from_volume`
-3. Експортуйте в `baloon/shapes/__init__.py`
-4. Додайте викрійку в `baloon/patterns/`
-5. Оновіть `baloon/labels.py` та `baloon/constants.py`
+3. Експортуйте в `balloon/shapes/__init__.py`
+4. Додайте викрійку в `balloon/patterns/`
+5. Оновіть `balloon/labels.py` та `balloon/constants.py`
 

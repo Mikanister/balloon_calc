@@ -51,11 +51,11 @@
 ## Готові релізи (exe)
 
 Усі стабільні версії програми для Windows зберігаються у папці `dist_exe/`:
-- `dist_exe/v2.0/baloon_calculator.exe` — актуальна версія з усіма новими можливостями
+- `dist_exe/v2.0/balloon_calculator.exe` — актуальна версія з усіма новими можливостями
 
 ### Запуск exe-файлу
 1. Перейдіть у папку `dist_exe/v2.0/`
-2. Запустіть файл `baloon_calculator.exe` подвійним кліком
+2. Запустіть файл `balloon_calculator.exe` подвійним кліком
 3. Python не потрібен
 
 ## Запуск з Python (розробка)
@@ -80,17 +80,17 @@ pip install -e .
 
 #### Варіант 1: Як модуль (рекомендовано)
 ```bash
-python -m baloon
+python -m balloon
 ```
 
 #### Варіант 2: Через main_improved.py
 ```bash
-python -m baloon.main_improved
+python -m balloon.main_improved
 ```
 
 #### Варіант 3: Напряму
 ```bash
-python baloon/gui_main.py
+python balloon/gui_main.py
 ```
 
 ## Запуск тестів
@@ -101,7 +101,7 @@ pytest
 
 З покриттям коду:
 ```bash
-pytest --cov=baloon --cov-report=html
+pytest --cov=balloon --cov-report=html
 ```
 
 Детальніше про тести див. `tests/README.md`
@@ -126,8 +126,8 @@ mkdocs build
 ## Структура проекту
 
 ```
-baloon_calc/
-├── baloon/                    # Основний пакет
+balloon_calc/
+├── balloon/                    # Основний пакет
 │   ├── gui_main.py            # Головний GUI файл
 │   ├── calculations.py        # Логіка розрахунків
 │   ├── models.py              # Pydantic моделі
@@ -192,6 +192,6 @@ baloon_calc/
 
 ## Примітки
 
-- Усі підписи, підказки, дефолти та тексти централізовано у `baloon/labels.py` для зручності локалізації та модифікації
+- Усі підписи, підказки, дефолти та тексти централізовано у `balloon/labels.py` для зручності локалізації та модифікації
 - Проект використовує сучасні Python практики: type hints, Pydantic, pyproject.toml
 - Документація генерується автоматично з docstrings та Markdown файлів

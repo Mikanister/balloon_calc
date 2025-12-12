@@ -32,7 +32,7 @@ pip install -e .
 ## Запуск exe файлу
 
 Для Windows доступний готовий exe файл:
-- `dist_exe/v2.0/baloon_calculator.exe`
+- `dist_exe/v2.0/balloon_calculator.exe`
 
 Просто запустіть файл подвійним кліком.
 

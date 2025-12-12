@@ -4,7 +4,7 @@
 
 import pytest
 import math
-from baloon.calculations import (
+from balloon.calculations import (
     air_density_at_height,
     calc_stress,
     required_balloon_volume,
@@ -12,7 +12,7 @@ from baloon.calculations import (
     calculate_gas_loss,
     calculate_balloon_parameters
 )
-from baloon.constants import (
+from balloon.constants import (
     T0, SEA_LEVEL_PRESSURE, SEA_LEVEL_AIR_DENSITY,
     GAS_CONSTANT, GAS_DENSITY, MATERIALS
 )
@@ -139,7 +139,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload"
@@ -160,7 +160,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=3,  # кг навантаження
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="volume"
@@ -176,7 +176,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гаряче повітря",
             gas_volume=100,
             material="TPU",
-            thickness_mm=50,
+            thickness_um=50,
             start_height=0,
             work_height=500,
             ground_temp=15,
@@ -195,7 +195,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             duration=24,
@@ -217,7 +217,7 @@ class TestCalculateBalloonParameters:
                 gas_type="Невідомий газ",
                 gas_volume=10,
                 material="TPU",
-                thickness_mm=35,
+                thickness_um=35,
                 start_height=0,
                 work_height=1000
             )
@@ -229,7 +229,7 @@ class TestCalculateBalloonParameters:
                 gas_type="Гелій",
                 gas_volume=-10,
                 material="TPU",
-                thickness_mm=35,
+                thickness_um=35,
                 start_height=0,
                 work_height=1000
             )
@@ -241,7 +241,7 @@ class TestCalculateBalloonParameters:
                 gas_type="Гаряче повітря",
                 gas_volume=100,
                 material="TPU",
-                thickness_mm=50,
+                thickness_um=50,
                 start_height=0,
                 work_height=500,
                 ground_temp=100,
@@ -257,7 +257,7 @@ class TestCalculateBalloonParameters:
                 gas_type="Гелій",
                 gas_volume=10,
                 material=material,
-                thickness_mm=35,
+                thickness_um=35,
                 start_height=0,
                 work_height=1000,
                 mode="payload"
@@ -275,7 +275,7 @@ class TestCalculateBalloonParameters:
                 gas_type="Гелій",
                 gas_volume=10,
                 material="TPU",
-                thickness_mm=35,
+                thickness_um=35,
                 start_height=0,
                 work_height=height,
                 mode="payload"
@@ -288,7 +288,7 @@ class TestCalculateBalloonParameters:
                     gas_type="Гелій",
                     gas_volume=10,
                     material="TPU",
-                    thickness_mm=35,
+                    thickness_um=35,
                     start_height=0,
                     work_height=0,
                     mode="payload"
@@ -301,7 +301,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -321,7 +321,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -343,7 +343,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -362,7 +362,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -383,7 +383,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -403,7 +403,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -414,7 +414,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -432,7 +432,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",
@@ -443,7 +443,7 @@ class TestCalculateBalloonParameters:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=1000,
             mode="payload",

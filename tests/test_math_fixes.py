@@ -4,12 +4,12 @@
 
 import pytest
 import math
-from baloon.calculations import (
+from balloon.calculations import (
     sphere_surface_area,
     calculate_gas_density_at_altitude,
     air_density_at_height
 )
-from baloon.constants import (
+from balloon.constants import (
     GAS_SPECIFIC_CONSTANT,
     SEA_LEVEL_PRESSURE,
     T0
@@ -148,7 +148,7 @@ class TestGasDensityAtAltitude:
         rho = calculate_gas_density_at_altitude("Гаряче повітря", pressure, temperature)
         
         # Для повітря: ρ = P/(R * T), де R = 287.05 Дж/(кг·К)
-        from baloon.constants import GAS_CONSTANT
+        from balloon.constants import GAS_CONSTANT
         expected = pressure / (GAS_CONSTANT * temperature)
         assert rho == pytest.approx(expected, rel=1e-10)
         
@@ -169,14 +169,14 @@ class TestLiftCalculationCorrection:
     
     def test_lift_with_corrected_density(self):
         """Перевірка що підйомна сила розраховується правильно"""
-        from baloon.calculations import calculate_balloon_parameters
+        from balloon.calculations import calculate_balloon_parameters
         
         # Розрахунок на рівні моря
         results_sea = calculate_balloon_parameters(
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=0,
             mode="payload"
@@ -187,7 +187,7 @@ class TestLiftCalculationCorrection:
             gas_type="Гелій",
             gas_volume=10,
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             start_height=0,
             work_height=10000,
             mode="payload"

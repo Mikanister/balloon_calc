@@ -3,14 +3,14 @@
 """
 
 import pytest
-from baloon.analysis import (
+from balloon.analysis import (
     calculate_optimal_height,
     calculate_height_profile,
     calculate_material_comparison,
     calculate_cost_analysis,
     generate_report
 )
-from baloon.constants import MATERIALS
+from balloon.constants import MATERIALS
 
 
 class TestCalculateOptimalHeight:
@@ -21,7 +21,7 @@ class TestCalculateOptimalHeight:
         result = calculate_optimal_height(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15
         )
@@ -38,7 +38,7 @@ class TestCalculateOptimalHeight:
         result = calculate_optimal_height(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             shape_type="cylinder",
@@ -51,7 +51,7 @@ class TestCalculateOptimalHeight:
         result2 = calculate_optimal_height(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             shape_type="torus",
@@ -65,7 +65,7 @@ class TestCalculateOptimalHeight:
         result = calculate_optimal_height(
             gas_type="Гаряче повітря",
             material="TPU",
-            thickness_mm=50,
+            thickness_um=50,
             gas_volume=100,
             ground_temp=15,
             inside_temp=100
@@ -79,7 +79,7 @@ class TestCalculateOptimalHeight:
         result_without = calculate_optimal_height(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             extra_mass=0.0
@@ -88,7 +88,7 @@ class TestCalculateOptimalHeight:
         result_with = calculate_optimal_height(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             extra_mass=1.0
@@ -102,7 +102,7 @@ class TestCalculateOptimalHeight:
         result_without = calculate_optimal_height(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             seam_factor=1.0
@@ -111,7 +111,7 @@ class TestCalculateOptimalHeight:
         result_with = calculate_optimal_height(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             seam_factor=1.1
@@ -129,7 +129,7 @@ class TestCalculateHeightProfile:
         profile = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             max_height=5000
@@ -150,7 +150,7 @@ class TestCalculateHeightProfile:
         profile = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             max_height=2000,
@@ -163,7 +163,7 @@ class TestCalculateHeightProfile:
         profile2 = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             ground_temp=15,
             max_height=2000,
@@ -177,7 +177,7 @@ class TestCalculateHeightProfile:
         profile = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             max_height=2000
         )
@@ -195,7 +195,7 @@ class TestCalculateHeightProfile:
         profile = calculate_height_profile(
             gas_type="Гаряче повітря",
             material="TPU",
-            thickness_mm=50,
+            thickness_um=50,
             gas_volume=100,
             ground_temp=15,
             inside_temp=100,
@@ -211,7 +211,7 @@ class TestCalculateHeightProfile:
         profile_short = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             max_height=1000
         )
@@ -219,7 +219,7 @@ class TestCalculateHeightProfile:
         profile_long = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             max_height=5000
         )
@@ -233,7 +233,7 @@ class TestCalculateHeightProfile:
         profile_without = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             max_height=2000,
             extra_mass=0.0
@@ -242,7 +242,7 @@ class TestCalculateHeightProfile:
         profile_with = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             max_height=2000,
             extra_mass=1.0
@@ -257,7 +257,7 @@ class TestCalculateHeightProfile:
         profile_without = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             max_height=2000,
             seam_factor=1.0
@@ -266,7 +266,7 @@ class TestCalculateHeightProfile:
         profile_with = calculate_height_profile(
             gas_type="Гелій",
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             max_height=2000,
             seam_factor=1.1
@@ -284,7 +284,7 @@ class TestCalculateMaterialComparison:
         """Перевірка порівняння всіх матеріалів"""
         results = calculate_material_comparison(
             gas_type="Гелій",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             height=1000
         )
@@ -308,7 +308,7 @@ class TestCalculateMaterialComparison:
         # Циліндр
         results = calculate_material_comparison(
             gas_type="Гелій",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             height=1000,
             shape_type="cylinder",
@@ -320,7 +320,7 @@ class TestCalculateMaterialComparison:
         """Перевірка властивостей матеріалів"""
         results = calculate_material_comparison(
             gas_type="Гелій",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             height=1000
         )
@@ -335,7 +335,7 @@ class TestCalculateMaterialComparison:
         """Перевірка порівняння матеріалів для гарячого повітря"""
         results = calculate_material_comparison(
             gas_type="Гаряче повітря",
-            thickness_mm=50,
+            thickness_um=50,
             gas_volume=100,
             ground_temp=15,
             inside_temp=100,
@@ -352,7 +352,7 @@ class TestCalculateMaterialComparison:
         """Перевірка порівняння матеріалів з додатковою масою"""
         results_without = calculate_material_comparison(
             gas_type="Гелій",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             height=1000,
             extra_mass=0.0
@@ -360,7 +360,7 @@ class TestCalculateMaterialComparison:
         
         results_with = calculate_material_comparison(
             gas_type="Гелій",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             height=1000,
             extra_mass=1.0
@@ -374,7 +374,7 @@ class TestCalculateMaterialComparison:
         """Перевірка порівняння матеріалів з коефіцієнтом швів"""
         results_without = calculate_material_comparison(
             gas_type="Гелій",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             height=1000,
             seam_factor=1.0
@@ -382,7 +382,7 @@ class TestCalculateMaterialComparison:
         
         results_with = calculate_material_comparison(
             gas_type="Гелій",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             height=1000,
             seam_factor=1.1
@@ -400,7 +400,7 @@ class TestCalculateCostAnalysis:
         """Перевірка базового аналізу вартості"""
         result = calculate_cost_analysis(
             material="TPU",
-            thickness_mm=35,
+            thickness_um=35,
             gas_volume=10,
             gas_type="Гелій",
             height=1000
@@ -424,7 +424,7 @@ class TestCalculateCostAnalysis:
         for material in materials:
             result = calculate_cost_analysis(
                 material=material,
-                thickness_mm=35,
+                thickness_um=35,
                 gas_volume=10,
                 gas_type="Гелій",
                 height=1000
@@ -440,7 +440,7 @@ class TestCalculateCostAnalysis:
         for gas in gases:
             result = calculate_cost_analysis(
                 material="TPU",
-                thickness_mm=35,
+                thickness_um=35,
                 gas_volume=10,
                 gas_type=gas,
                 ground_temp=15,

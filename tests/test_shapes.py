@@ -4,19 +4,24 @@
 
 import pytest
 import math
-from baloon.shapes import (
+from balloon.shapes import (
     sphere_volume,
     sphere_surface_area,
-    cylinder_volume,
-    cylinder_surface_area,
-    torus_volume,
-    torus_surface_area,
     pillow_volume,
     pillow_surface_area,
     sphere_radius_from_volume,
-    cylinder_dimensions_from_volume,
-    torus_dimensions_from_volume,
     pillow_dimensions_from_volume,
+)
+# Cylinder та torus не експортуються з __init__.py, імпортуємо напряму для тестів
+from balloon.shapes.cylinder import (
+    cylinder_volume,
+    cylinder_surface_area,
+    cylinder_dimensions_from_volume,
+)
+from balloon.shapes.torus import (
+    torus_volume,
+    torus_surface_area,
+    torus_dimensions_from_volume,
 )
 
 
