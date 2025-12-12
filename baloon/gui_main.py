@@ -321,11 +321,21 @@ class BalloonCalculatorGUI:
         
         # Вибір форми
         shape_values = COMBOBOX_VALUES['shape_type']
+        # Використовуємо реєстр форм з constants.py
+        try:
+            from baloon.constants import get_shape_code, get_shape_display_name, SHAPES
+        except ImportError:
+            from constants import get_shape_code, get_shape_display_name, SHAPES
+        
+        # Створюємо мапінг display_name -> code та code -> display_name
         self.shape_display_to_code = {
-            "Сфера": "sphere",
-            "Подушка/мішок": "pillow",
+            shape["display_name"]: shape["code"]
+            for shape in SHAPES.values()
         }
-        self.shape_code_to_display = {v: k for k, v in self.shape_display_to_code.items()}
+        self.shape_code_to_display = {
+            shape["code"]: shape["display_name"]
+            for shape in SHAPES.values()
+        }
         self.labels['shape_type'] = ttk.Label(parent, text=FIELD_LABELS['shape_type'])
         self.labels['shape_type'].grid(row=row, column=0, sticky="w")
         shape_combo = ttk.Combobox(parent, values=shape_values, state="readonly", textvariable=self.shape_var)

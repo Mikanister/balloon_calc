@@ -11,7 +11,8 @@ try:
         DEFAULT_PILLOW_LEN, DEFAULT_PILLOW_WID,
         DEFAULT_PEAR_HEIGHT, DEFAULT_PEAR_TOP_RADIUS, DEFAULT_PEAR_BOTTOM_RADIUS,
         DEFAULT_CIGAR_LENGTH, DEFAULT_CIGAR_RADIUS,
-        DEFAULT_EXTRA_MASS, DEFAULT_SEAM_FACTOR
+        DEFAULT_EXTRA_MASS, DEFAULT_SEAM_FACTOR,
+        get_shape_display_names  # Імпортуємо функцію для отримання списку форм
     )
 except ImportError:
     from constants import (
@@ -21,7 +22,8 @@ except ImportError:
         DEFAULT_PILLOW_LEN, DEFAULT_PILLOW_WID,
         DEFAULT_PEAR_HEIGHT, DEFAULT_PEAR_TOP_RADIUS, DEFAULT_PEAR_BOTTOM_RADIUS,
         DEFAULT_CIGAR_LENGTH, DEFAULT_CIGAR_RADIUS,
-        DEFAULT_EXTRA_MASS, DEFAULT_SEAM_FACTOR
+        DEFAULT_EXTRA_MASS, DEFAULT_SEAM_FACTOR,
+        get_shape_display_names
     )
 
 # Підписи для полів
@@ -98,12 +100,7 @@ FIELD_DEFAULTS = {
 # Варіанти для комбобоксів
 COMBOBOX_VALUES = {
     'perm_mult': ["1", "10", "100", "1000"],
-    'shape_type': [
-        "Сфера",
-        "Подушка/мішок",
-        "Груша",
-        "Сигара",
-    ]
+    'shape_type': get_shape_display_names()  # Використовуємо реєстр форм з constants.py
 }
 
 # Тексти для About-діалогу

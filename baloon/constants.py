@@ -42,6 +42,52 @@ GAS_SPECIFIC_CONSTANT = {
 
 # Для зворотної сумісності
 GAS_DENSITY = GAS_DENSITY_AT_STP
+
+# ============================================================================
+# РЕЄСТР ФОРМ ОБОЛОНКИ - єдине джерело правди для форм
+# ============================================================================
+# Кожна форма має:
+#   - display_name: назва для відображення в UI
+#   - code: внутрішній код форми
+#   - default_params: словник з дефолтними параметрами
+#   - description: опис форми
+SHAPES = {
+    "sphere": {
+        "display_name": "Сфера",
+        "code": "sphere",
+        "default_params": {},
+        "description": "Класична сферична форма"
+    },
+    "pillow": {
+        "display_name": "Подушка/мішок",
+        "code": "pillow",
+        "default_params": {
+            "pillow_len": 3.0,  # м
+            "pillow_wid": 2.0,  # м
+        },
+        "description": "Еліпсоїдна форма з параметрами довжини та ширини"
+    },
+    "pear": {
+        "display_name": "Груша",
+        "code": "pear",
+        "default_params": {
+            "pear_height": 3.0,  # м
+            "pear_top_radius": 1.2,  # м - радіус верхньої частини (ширша)
+            "pear_bottom_radius": 0.6,  # м - радіус нижньої частини (вужча)
+        },
+        "description": "Конічна форма з різними радіусами верхньої та нижньої частини"
+    },
+    "cigar": {
+        "display_name": "Сигара",
+        "code": "cigar",
+        "default_params": {
+            "cigar_length": 5.0,  # м
+            "cigar_radius": 1.0,  # м
+        },
+        "description": "Циліндрична форма з параметрами довжини та радіуса"
+    }
+}
+
 # Налаштування за замовчуванням
 DEFAULT_THICKNESS = 35  # мкм
 DEFAULT_START_HEIGHT = 0  # м
@@ -50,30 +96,72 @@ DEFAULT_GROUND_TEMP = 15  # °C
 DEFAULT_INSIDE_TEMP = 100  # °C
 DEFAULT_PAYLOAD = 3  # кг
 DEFAULT_GAS_VOLUME = 10  # м³
-DEFAULT_SHAPE_TYPE = "Сфера"
-DEFAULT_PILLOW_LEN = 3.0  # м
-DEFAULT_PILLOW_WID = 2.0  # м
-DEFAULT_PILLOW_HEIGHT = 1.0  # м
-DEFAULT_PEAR_HEIGHT = 3.0  # м - висота груші
-DEFAULT_PEAR_TOP_RADIUS = 1.2  # м - радіус верхньої частини (ширша)
-DEFAULT_PEAR_BOTTOM_RADIUS = 0.6  # м - радіус нижньої частини (вужча)
-DEFAULT_CIGAR_LENGTH = 5.0  # м - загальна довжина сигари
-DEFAULT_CIGAR_RADIUS = 1.0  # м - радіус сигари
+DEFAULT_SHAPE_TYPE = "Сфера"  # Використовує display_name з SHAPES
+
+# Дефолтні параметри форм (для зворотної сумісності)
+DEFAULT_PILLOW_LEN = SHAPES["pillow"]["default_params"]["pillow_len"]
+DEFAULT_PILLOW_WID = SHAPES["pillow"]["default_params"]["pillow_wid"]
+DEFAULT_PILLOW_HEIGHT = 1.0  # м (не використовується, але залишено для сумісності)
+DEFAULT_PEAR_HEIGHT = SHAPES["pear"]["default_params"]["pear_height"]
+DEFAULT_PEAR_TOP_RADIUS = SHAPES["pear"]["default_params"]["pear_top_radius"]
+DEFAULT_PEAR_BOTTOM_RADIUS = SHAPES["pear"]["default_params"]["pear_bottom_radius"]
+DEFAULT_CIGAR_LENGTH = SHAPES["cigar"]["default_params"]["cigar_length"]
+DEFAULT_CIGAR_RADIUS = SHAPES["cigar"]["default_params"]["cigar_radius"]
 DEFAULT_EXTRA_MASS = 0.0  # кг - додаткова маса обладнання
 DEFAULT_SEAM_FACTOR = 1.05  # множник для площі поверхні через шви (5% додатково)
 
-# Коефіцієнти проникності (м²/(с·Па)) для гелію та водню
-# Джерело: типові довідкові значення для полімерів
+# Допоміжні функції для роботи з формами
+def get_shape_display_names():
+    """Повертає список назв форм для відображення в UI"""
+    return [shape["display_name"] for shape in SHAPES.values()]
+
+def get_shape_code(display_name: str) -> str:
+    """Повертає код форми за назвою для відображення"""
+    for code, shape in SHAPES.items():
+        if shape["display_name"] == display_name:
+            return code
+    return "sphere"  # fallback
+
+def get_shape_display_name(code: str) -> str:
+    """Повертає назву форми для відображення за кодом"""
+    return SHAPES.get(code, SHAPES["sphere"])["display_name"]
+
+def get_shape_default_params(code: str) -> dict:
+    """Повертає дефолтні параметри форми"""
+    return SHAPES.get(code, SHAPES["sphere"])["default_params"].copy()
+
+# ============================================================================
+# КОЕФІЦІЄНТИ ПРОНИКНОСТІ (м²/(с·Па)) для гелію та водню
+# ============================================================================
+# Джерела та діапазони:
+# - Типові значення для полімерів: 1e-16 до 1e-12 м²/(с·Па)
+# - Джерела: довідники по полімерних матеріалах, технічні специфікації
+# - Примітка: значення можуть варіюватися залежно від товщини, температури,
+#   виробничого процесу. Використані середні/типові значення.
+#
+# Діапазони (орієнтовні):
+#   HDPE:     Гелій 0.5-2.0e-13, Водень 1.0-3.0e-13
+#   TPU:      Гелій 3.0-7.0e-13, Водень 8.0-12.0e-13
+#   Mylar:    Гелій 0.5-2.0e-15, Водень 1.0-3.0e-15 (дуже низька проникність)
+#   Nylon:    Гелій 1.0-3.0e-13, Водень 3.0-5.0e-13
+#   PET:      Гелій 0.5-2.0e-14, Водень 1.0-3.0e-14
+#   Kapton:   Гелій 1.0-10.0e-16, Водень 5.0-15.0e-16 (найнижча проникність)
+#   Tedlar:   Гелій 1.0-3.0e-14, Водень 2.0-5.0e-14
+#   LDPE:     Гелій 1.0-2.0e-13, Водень 2.0-4.0e-13
+#   PVC:      Гелій 2.0-4.0e-14, Водень 5.0-7.0e-14
+#   Polyester: Гелій 1.0-2.0e-14, Водень 2.0-4.0e-14
+#
+# Використані значення (середні з діапазонів):
 PERMEABILITY = {
-    'HDPE':   {'Гелій': 1.0e-13, 'Водень': 2.0e-13},
-    'TPU':    {'Гелій': 5.0e-13, 'Водень': 1.0e-12},
-    'Mylar':  {'Гелій': 1.0e-15, 'Водень': 2.0e-15},
-    'Nylon':  {'Гелій': 2.0e-13, 'Водень': 4.0e-13},
-    'PET':    {'Гелій': 1.0e-14, 'Водень': 2.0e-14},
-    'Kapton': {'Гелій': 5.0e-16, 'Водень': 1.0e-15},  # Дуже низька проникність
-    'Tedlar': {'Гелій': 2.0e-14, 'Водень': 4.0e-14},
-    'LDPE':   {'Гелій': 1.5e-13, 'Водень': 3.0e-13},
-    'Polyethylene': {'Гелій': 1.2e-13, 'Водень': 2.5e-13},
-    'PVC':    {'Гелій': 3.0e-14, 'Водень': 6.0e-14},
-    'Polyester': {'Гелій': 1.5e-14, 'Водень': 3.0e-14},
+    'HDPE':   {'Гелій': 1.0e-13, 'Водень': 2.0e-13},  # Використано: середнє
+    'TPU':    {'Гелій': 5.0e-13, 'Водень': 1.0e-12},  # Використано: середнє-високе
+    'Mylar':  {'Гелій': 1.0e-15, 'Водень': 2.0e-15},  # Використано: середнє (дуже низька)
+    'Nylon':  {'Гелій': 2.0e-13, 'Водень': 4.0e-13},  # Використано: середнє
+    'PET':    {'Гелій': 1.0e-14, 'Водень': 2.0e-14},  # Використано: середнє
+    'Kapton': {'Гелій': 5.0e-16, 'Водень': 1.0e-15},  # Використано: середнє (найнижча)
+    'Tedlar': {'Гелій': 2.0e-14, 'Водень': 4.0e-14},  # Використано: середнє
+    'LDPE':   {'Гелій': 1.5e-13, 'Водень': 3.0e-13},  # Використано: середнє
+    'Polyethylene': {'Гелій': 1.2e-13, 'Водень': 2.5e-13},  # Використано: середнє
+    'PVC':    {'Гелій': 3.0e-14, 'Водень': 6.0e-14},  # Використано: середнє
+    'Polyester': {'Гелій': 1.5e-14, 'Водень': 3.0e-14},  # Використано: середнє
 } 

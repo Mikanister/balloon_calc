@@ -287,7 +287,11 @@ def calculate_balloon_parameters(
     seam_factor: float = 1.0,
 ) -> Dict[str, Any]:
     """
-    Основний розрахунок параметрів аеростата
+    Основний розрахунок параметрів аеростата (обгортка над model.solve)
+    
+    Для нових проектів використовуйте напряму:
+    - baloon.model.solve.solve_volume_to_payload() для режиму "payload"
+    - baloon.model.solve.solve_payload_to_volume() для режиму "volume"
     
     Args:
         gas_type: Тип газу
@@ -307,7 +311,45 @@ def calculate_balloon_parameters(
     Returns:
         Словник з результатами розрахунків
     """
-    # Конвертація одиниць
+    try:
+        from baloon.model.solve import solve_volume_to_payload, solve_payload_to_volume
+    except ImportError:
+        from model.solve import solve_volume_to_payload, solve_payload_to_volume
+    
+    if mode == "payload":
+        return solve_volume_to_payload(
+            gas_type=gas_type,
+            gas_volume=gas_volume,
+            material=material,
+            thickness_mm=thickness_mm,
+            start_height=start_height,
+            work_height=work_height,
+            ground_temp=ground_temp,
+            inside_temp=inside_temp,
+            duration=duration,
+            perm_mult=perm_mult,
+            shape_type=shape_type,
+            shape_params=shape_params,
+            extra_mass=extra_mass,
+            seam_factor=seam_factor
+        )
+    else:
+        return solve_payload_to_volume(
+            gas_type=gas_type,
+            target_payload=gas_volume,  # В режимі "volume" gas_volume - це насправді target_payload
+            material=material,
+            thickness_mm=thickness_mm,
+            start_height=start_height,
+            work_height=work_height,
+            ground_temp=ground_temp,
+            inside_temp=inside_temp,
+            duration=duration,
+            perm_mult=perm_mult,
+            shape_type=shape_type,
+            shape_params=shape_params,
+            extra_mass=extra_mass,
+            seam_factor=seam_factor
+        )
     thickness = thickness_mm / 1e6  # мкм -> м
     total_height = start_height + work_height
     shape_params = shape_params or {}
