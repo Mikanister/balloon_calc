@@ -1,0 +1,13 @@
+{
+  "mode": "payload",
+  "material": "TPU",
+  "gas": "Гелій",
+  "thickness": "35",
+  "start_height": "0",
+  "work_height": "1000",
+  "ground_temp": "15",
+  "inside_temp": "100",
+  "payload": "3",
+  "gas_volume": "15",
+  "perm_mult": "1"
+}

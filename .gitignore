@@ -12,7 +12,6 @@ pip-wheel-metadata/
 # Build / dist artifacts
 build/
 dist/
-dist_exe/
 *.spec
 *.egg-info/
 .eggs/
